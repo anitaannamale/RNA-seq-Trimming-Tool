@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Time-stamp: "configuration.xml"    13 April 2015 10:14:04" -->
+<!-- Author : "Anita Annamalé" -->
+<!-- Description : 
+ 
+ "This XML file ables you to configure the adapter and quality trimming
+ parameters for reads sequenced using a high throughput sequencing technics.
+ 
+ Adapter and Quality trimming are done by Trimmomatic. You can do either Adapter
+ Trimming either Quality trimming or both if you want.
+ 
+ If you don't want to use a parameter, enter 'yes' for the skip option." 
+ -->
+
+
+<configuration>
+    
+    <input-output>
+        
+        <!-- If the data are Single-Ended, type "SE" between the brakets or "PE" if Paired-Ended -->
+        <layout>pe</layout>
+        
+        <single-ends>
+            <input>Tricho_100_1.fastq</input>
+        </single-ends>
+
+        <paired-ends>
+            <input name= "read 1">Tricho_100_1.fastq</input>
+            <input name= "read 2">Tricho_100_2.fastq</input>
+        </paired-ends>
+
+        <!-- Enter the directory where outputs of this App will be redirected -->
+        <working-directory>.</working-directory>
+
+    </input-output>
+    
+    
+    <program name="trimmomatic" choice="yes">
+
+
+        <!-- If you want to do Adapter Trimming, enter 'no' for skip. Default : skip='no'. -->
+        <category name="adapter-trimming">
+
+            <skip>no</skip>
+
+            <parameter name="illuminaclip">
+            <!-- 
+                This parameters can find adapter or contaminant sequences within a dataset and remove it.
+            
+                The parameter takes 6 arguments :
+                    - adapter-fasta-file [string] : absolute path where the fasta-file containing adapters sequences
+                                                    can be found
+                    - seed-mismatches [integer] : maximum allowed mismatches for 16 bases.
+                    - palindrome-clip-threshold [integer] : Palindrome mode is used for 'Paired-ended' data.
+                    - simple-clip-threshold [integer] : Simple mode is used for 'Single-ended' data.
+        
+                    Optinal paramters that affect palindrome mode only :
+                    - min-adapter-length [integer] : minimum adapter sequence match length
+                    - keep-both-reads [string] : if 'true', both read will be keept even if they contain the same information,
+                                                 if 'false', the read will be drooped
+         
+             Default: seed-mistmatches = 2 , palindrome-clip-threshold = 30 , single-clip-threshold = 10
+                     min-adapter-length = 8, keep-both-reads = true
+             -->
+    	
+                <adapters-fasta-file>Adapters.fasta</adapters-fasta-file>
+                <seed-mismatches>2</seed-mismatches>
+                <palindrome-clip-threshold>30</palindrome-clip-threshold>
+                <simple-clip-threshold>10</simple-clip-threshold>
+
+
+                <min-adapter-length>
+                    <skip>yes</skip>
+                    <value>8</value>
+                </min-adapter-length>
+                
+                <keep-both-reads>
+                    <skip>no</skip>
+                    <value>TRUE</value>
+                </keep-both-reads>
+                
+
+            </parameter>
+
+        </category>
+
+
+
+        <!-- If you want to do Quality Trimming, enter 'no' for the skip option. Default : skip = 'no'.	-->
+        <category name="quality-trimming" >
+            
+            <skip>no</skip>
+    	
+        
+        <!-- Here you can enter your quality trimming parameters -->
+        
+        
+            <parameter name="sliding-window">
+                
+                <skip>no</skip>
+                
+            <!--
+                The Sliding Window can trim reads that have atleast the wanted quality
+             inside a choosen size window.
+
+                The parameter takes 2 arguments :
+                    - window-length [integer] : size of the window
+                    - required-quality [integer] : required quality inside the window
+
+             Default : window-length = 4 & required-quality = 30 if genome is well covered
+                    if not :  window-length = 10 & required-quality = 30
+             -->
+
+                <window-length>4</window-length>
+                <required-quality>30</required-quality>
+
+            </parameter>
+
+
+
+            <parameter name= "maxinfo">
+                
+                <skip>yes</skip>
+                
+            <!--
+                Maxinfo performs an adaptative quality trimming, balancing the benefits of
+             retaining longer reads against the costs of retaining bases with errors.
+         
+                The parameter takes 2 arguments :
+                    - target-length [integer] : minimum length of the read
+                    - strictness [float] : range from 0 to 1. A low value (<0.2) favours
+                                           long reads and a high value (0.8) favours read
+                                           correctness
+                 
+             Default : target-length = 5 & strictness = 0.3
+             -->
+        
+                <target-length>5</target-length>
+                <strictness>0.3</strictness>
+            
+            </parameter>
+
+
+            <parameter name= "leading">
+                
+                <skip>yes</skip>
+                
+            <!--
+                The Leading parameter can trim reads that have atleast the required quality
+             on the 5' end of the read.
+		
+                It takes one argument : required-quality [integer] : minimal quality needed
+
+             Default : required-quality = 20
+             -->
+            
+                <required-quality>20</required-quality>
+		
+            </parameter>
+
+
+            <parameter name="trailing">
+                
+                <skip>yes</skip>
+                
+            <!--
+                The Trailing parameter can trim reads that have atleast the required quality
+             on the 3' end of the read.
+		
+                It takes one argument : required-quality [integer] : minimal quality needed
+
+             Default : required-quality = 20
+             -->
+                <required-quality>20</required-quality>
+
+            </parameter>
+
+
+            <parameter name="crop">
+                
+                <skip>yes</skip>
+                
+            <!--
+                The Crop parameter can trim N number of bases on the 3' end of the read.
+		
+                It takes one argument : length [integer] : number of bases to trim
+
+             Default : length = 0
+             -->
+			
+                <length>0</length>
+
+            </parameter>
+
+
+            <parameter name="headcrop">
+                
+                <skip>yes</skip>
+                
+            <!--
+                The HeadCrop parameter can trim N number of bases on the 5' end of the read.
+		
+                It takes one argument : length [integer] : length of bases to trim
+
+             Default : length = 0
+             -->
+                <length>0</length>
+
+            </parameter>
+
+
+            <parameter name="minlen">
+                
+                <skip>no</skip>
+                
+            <!--
+                The Minlen parameter can filter reads that are shorter than the specified
+            length.
+		
+                It takes one argument : length [integer] : minimal length
+
+             Default : length = 36
+             -->
+
+                <length>36</length>
+
+            </parameter>
+
+
+            <parameter name="average-quality">
+                
+                <skip>yes</skip>
+                
+            <!--
+                This parameter filter a read if his average quality is below the specified level
+
+                It takes one argument : required-quality [integer] required average quality
+
+             Default : required-quality = 0
+             -->
+
+                <required-quality>0</required-quality>
+            
+            </parameter>
+
+
+        </category>
+
+
+
+         <!-- Here are the 'Useful' parameters -->
+
+        <category name="useful-parameters">
+            
+        
+            <parameter name="singleton-reads">
+            <!--
+                 If you want the singleton reads (reads which are good but the paired is not) as output
+             type yes in <show>.
+                
+                It takes one argument : show [string] : 'yes' or 'no'
+             -->
+            
+                <show>yes</show>
+            
+            </parameter>
+            
+            
+            <parameter name="convert-to-phred">
+                
+                <skip>yes</skip>
+            <!--
+                This parameter can convert phred33 to phred64 and convert phred64 to phred33
+		
+                It tooks one argument : format [interger] : 33 or 64
+             -->
+            
+                <format>33</format>
+
+            </parameter>
+
+
+            <parameter name="threads">
+            <!--
+                This parameter fix the number of threads that can be used.
+                
+                It takes one argument : number [integer] : number of threads to use
+             
+             Default : number = 5
+             -->
+            
+                <number>5</number>
+
+            </parameter>
+
+
+            <parameter name="compressed-output">
+                
+                <skip>yes</skip>
+                
+			<!-- 
+                This parameter can compress the output files. Two format are supported : bzip2 (.bz2) and
+             zip (.gz).
+                
+                It takes one argument : format [string] : wanted compression format. 'bz2' or 'gz'
+             
+             Default : format = bz2
+             -->
+            
+                <format>bz2</format>
+
+            </parameter>
+
+
+        </category>
+
+
+    </program>
+
+
+</configuration>

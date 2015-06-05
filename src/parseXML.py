@@ -60,8 +60,8 @@ def separate_steps(root):
 	
 	# checking that the root have 2 child
 	if not check_child_number(root,2) :
-		sys.exit("/!\ Warning : The XML file must contain exactly one Input and \
-Output section and one program (Trimmomatic)")
+		sys.exit("/!\ Warning : The XML file must contain exactly one Input and\
+ Output section and one program (Trimmomatic)")
 	
 	# separting the different steps	
 	for element in root :
@@ -82,13 +82,16 @@ or the name of program (trimmomatic) have been modified")
 
 def separate_categories_Trimmo(Trimmomatic):
 	"""
-	Function that separates the subtree (Trimmomatic program) according to categories.
+	Function that separates the subtree (Trimmomatic program) according to 
+	categories.
 	
 	Takes one argument : Trimmomatic [ElementTree] : tree 
 	
 	Returns four arguments :
-		- Adapter [ElementTree] : subtree which contains adapter trimming parameters
-		- Quality [ElementTree] : subtree which contains quality trimming parameters
+		- Adapter [ElementTree] : subtree which contains adapter trimming 
+		parameters
+		- Quality [ElementTree] : subtree which contains quality trimming 
+		parameters
 		- Useful [ElementTree] : subtree which contains uselful parameters
 	"""
 	
@@ -128,9 +131,10 @@ def get_input_output_parameters(Puts, param):
 	"""
 	Function that gets inputs and outputs parameters
 	
-	Takes two arguments : - Puts [ElementTree] : subtree which contains inputs and
-							outputs information's
-						  - param [dict] : dictionnary containning all parameters
+	Takes two arguments : - Puts [ElementTree] : subtree which contains inputs 
+							and outputs information's
+						  - param [dict] : dictionnary containning all 
+						    parameters
 	
 	Returns param[dict] where have been added inputs and outputs parameters
 	"""
@@ -191,7 +195,8 @@ def get_adapter_parameters(Adapter, param):
 	Function that gets adapter trimming parameters
 	
 	Takes 2 arguments:
-		- Adapter [ElementTree] : subtree which contains adapter trimming parameters
+		- Adapter [ElementTree] : subtree which contains adapter trimming 
+		  parameters
 		- param [dict] : dictionnary containning all parameters
 
 	Returns param [dict] with added adapter trimming parameters
@@ -224,7 +229,7 @@ option and 1 parameter for adapter trimming")
 			checked_clip_file = check_clip_file(clip_file)
 			
 			mismatches = check_integer(Clip.find('seed-mismatches').text, 
-												'mismatches in illuminaclip')
+									   'mismatches in illuminaclip')
 			P_thres = check_integer(Clip.find('palindrome-clip-threshold').text,
 									'palindrome clip threshold in illuminaclip')
 			S_thres = check_integer(Clip.find('simple-clip-threshold').text,
@@ -243,7 +248,10 @@ option and 1 parameter for adapter trimming")
 			
 			
 			# adding all the parameters to the dictionnary
-			param['clip']="{0}:{1}:{2}:{3}:{4}:{5}".format(checked_clip_file,mismatches,P_thres,S_thres,min_length,keep)
+			param['clip']="{0}:{1}:{2}:{3}:{4}:{5}".format(checked_clip_file,
+														   mismatches,P_thres,
+														   S_thres,min_length,
+														   keep)
 			
 
 			return param
@@ -251,7 +259,8 @@ option and 1 parameter for adapter trimming")
 		# if parameter name is not 'illuminaclip'
 		else :
 			sys.exit("/!\ Warning : The name of parameter 'illuminaclip'\
-have been modified or replaced by something else. Please rename it 'illuminaclip'")
+have been modified or replaced by something else. Please rename it \
+'illuminaclip'")
 	
 	# if skip = 'no'	
 	else :
@@ -265,7 +274,8 @@ def get_quality_parameters(Quality, param) :
 	Function that gets quality trimming parameters.
 
 	Takes 2 arguments:
-		- Quality [ElementTree] : subtree which contains quality trimming parameters
+		- Quality [ElementTree] : subtree which contains quality trimming 
+		  parameters
 		- param [dict] : dictionnary containning all parameters
 
 	Returns param [dict] with added quality trimming parameters
@@ -292,7 +302,8 @@ option skip and 8 parameters for quality trimming.")
 			checked_param_skip = check_skip(param_skip, 
 								'%s in quality trimming'%parameter.get('name'))
 			
-			# getting the arguments for the parameter and adding to dict if skip = no
+			# getting the arguments for the parameter and adding to dict if 
+			# skip = no
 			if(checked_param_skip == 'no'):
 				
 				if(parameter.get('name') == 'sliding-window'):
@@ -380,7 +391,8 @@ def get_useful_parameters(Useful, param) :
 	
 	# checking that useful parameter have 4 child
 	if not check_child_number(Useful,4):
-		sys.exit("/!\ Warning : The XML file must contain exactly 4 useful parameters\n")
+		sys.exit("/!\ Warning : The XML file must contain exactly 4 useful \
+parameters\n")
 
 
 	for parameter in Useful.findall('parameter') :
@@ -389,7 +401,8 @@ def get_useful_parameters(Useful, param) :
 		if(parameter.get('name') == 'singleton-reads'):
 			
 			# checking if text for show is not empty and either yes or no
-			show = check_yes_no(parameter.find('show').text, 'singleton-reads in useful-parameters')
+			show = check_yes_no(parameter.find('show').text, 'singleton-reads \
+in useful-parameters')
 
 			# adding to the dict if show = yes
 			if(show == 'yes'):
@@ -403,7 +416,8 @@ def get_useful_parameters(Useful, param) :
 			skip = parameter.find('skip').text
 
 			# checking if the skip text is not empty and if it's yes or no
-			checked_skip = check_skip(skip, 'convert-to-phred in useful parameters')
+			checked_skip = check_skip(skip, 'convert-to-phred in useful \
+parameters')
 
 			if(checked_skip == 'no'): 
 				format_num = check_integer(parameter.find('format').text,
@@ -415,8 +429,8 @@ def get_useful_parameters(Useful, param) :
 					continue
 				
 				else :
-					sys.exit("/!\ Warning : Quality score can only be converted \
-to phred33 or phred64.")
+					sys.exit("/!\ Warning : Quality score can only be converted\
+ to phred33 or phred64.")
 
 
 		elif (parameter.get('name') == 'threads') :
@@ -430,7 +444,8 @@ to phred33 or phred64.")
 		elif(parameter.get('name') == 'compressed-output'):
 			
 			skip = parameter.find('skip').text
-			checked_skip = check_skip(skip, 'compressed-output in useful parameters.')
+			checked_skip = check_skip(skip, 'compressed-output in useful \
+parameters.')
 			
 			if(skip == 'no') :
 				comp = check_format(parameter.find('format').text, 

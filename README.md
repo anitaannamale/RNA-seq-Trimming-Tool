@@ -15,11 +15,16 @@ Python 2.7.6 & Java (Trimmomatic)
 ## Usage
 
 This module has two ways of working (reading input files and trimming parameters) from : 
-      - an XML file
-      - or command line directly
+
+- an XML file
+      
+- or command line directly
+
+
+
 
 And each way has two modes to work :
-     - single ends "SE" `./Filtrage SE`
+     - single ends "SE" `./Filtrage SE` 
      - paired ends "PE" `./Filtrage PE`
 
 To read input files and trimming parameters from the XML file, run :
@@ -36,7 +41,20 @@ For more informations, see module help, running:
 
 `./Filtrage.py SE` takes an input fastq file and outputs a trimmed version of that file. It has all options given by Trimmomatic :
 
+- remove adapter sequences : `illuminaclip <fastaWithAdaptersEtc>:<seed mismatches>:<palindrome clip threshold>:<simple clip threshold>`
+- quality trimming : `-slidingwindow <window-size>:<required-quality>`
+- adaptative quality trimming depending on the length of reads : `-maxinfo <target-length>:<strictness>`
+- trim base from 5' end until the required minimal quality is achieved : `-leading <required-quality>`
+- trim base from 3' end until the required minimal quality is achieved : `-trailing <required-quality>`
+- trim a fixed number of bases from 5' end : `-head <number>`
+- trim a fixed number of bases from 3' end : `-crop <number>`
+- remove read shorter than a given length : `-minlen <length>`
 
+### Examples :
 
+      python Filtrage.py SE read_1.fastq -illuminaclip fasta-file.fa:2:10:30
+      python Filtrage.py SE read_1.fq -slidingwindow 10:30 -leading 30 -minlen 36
+      
 ## Paired ends data
 
+`./Filtrage.py PE` takes two input fastq files and outputs a trimmed version of these files. It has all options given by Trimmomatic,  see above.

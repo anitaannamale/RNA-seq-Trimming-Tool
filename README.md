@@ -29,7 +29,7 @@ And each way has two modes to work :
 
 To read input files and trimming parameters from the XML file, run :
 
-            'python ./Filtrage.py --XML'
+`python ./Filtrage.py --XML`
 
 To launch trimmomatic using commandline arguments see below:
 

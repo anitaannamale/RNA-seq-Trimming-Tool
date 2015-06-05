@@ -22,6 +22,16 @@ And each way has two modes to work :
      - single ends "SE"
      - paired ends "PE"
 
+To read input files and trimming parameters from the XML file, run :
+
+            'python ./Filtrage.py --XML'
+
+To launch trimmomatic using commandline arguments see below:.
+
+For more informations, see module help, running:
+
+            'python ./Filtrage.py -h'
+            
 ## Single ends data
 
 ## Paired ends data

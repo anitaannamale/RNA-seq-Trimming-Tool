@@ -35,8 +35,8 @@ def commandline_input_output(param, cmd, nb, inout):
 		- param [dict] : dictionnary containning all parameters
 		- cmd [string] : base command line of the programme (trimmomatic)
 		- nb [integer] : one or two step of trimming
-		- inout [dict] : dictionnary containning all generated files on the user's
-						working directory
+		- inout [dict] : dictionnary containning all generated files on the 
+						user's working directory
 	
 	Returns:
 		- cmd [string] : the command line with the input and output files
@@ -109,7 +109,10 @@ def commandline_input_output(param, cmd, nb, inout):
 		# if nb == 1, the first step (adapter trimming) have been done
 		# SO input of step 2 are output of step1	
 		elif(nb==1):
-			cmd += '{0} {1} {2} {3} {4} {5}'.format(inout['trimmed'][0], inout['trimmed'][1], trimmed_1, single_1, trimmed_2, single_2)
+			cmd += '{0} {1} {2} {3} {4} {5}'.format(inout['trimmed'][0],
+													inout['trimmed'][1],
+													trimmed_1, single_1,
+													trimmed_2, single_2)
 
 	return cmd,inout
 
@@ -120,8 +123,8 @@ def change_output_as_input(inout, param):
 	Function that change step1 output files to step2 input files.
 	
 	Takes 2 arguments :
-		- inout [dict] : dictionnary containning all generated files on the user's
-						working directory
+		- inout [dict] : dictionnary containning all generated files on the 
+						user's working directory
 		- param [dict] : dictionnary containning all parameters	
 	
 	Returns:
@@ -217,7 +220,8 @@ def commandline_quality(param,cmd):
 		- None if there is no adapter trimming step
 	"""
 	
-	# if atleast one quality trimming parameter is used, flag will be switched to 1
+	# if atleast one quality trimming parameter is used, flag will be switched 
+	# to 1
 	
 	flag = 0
 	

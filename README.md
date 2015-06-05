@@ -14,6 +14,14 @@ Python 2.7.6 & Java (Trimmomatic)
 
 ## Usage
 
+This module has two ways of working (reading input files and trimming parameters) from : 
+      - an XML file
+      - or command line directly
+
+And each way has two modes to work :
+     - single ends "SE"
+     - paired ends "PE"
+
 ## Single ends data
 
 ## Paired ends data

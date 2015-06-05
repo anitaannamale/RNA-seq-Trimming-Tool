@@ -45,7 +45,9 @@ or
       
 ## Single ends data
 
-`./Filtrage.py SE` takes an input fastq file and outputs a trimmed version of that file. It has all options given by Trimmomatic :
+`./Filtrage.py SE` takes an input fastq file and outputs a trimmed version of that file. 
+
+It has all options given by Trimmomatic :
 
 - remove adapter sequences : `illuminaclip <fastaWithAdaptersEtc>:<seed mismatches>:<palindrome clip threshold>:<simple clip threshold>`
 - quality trimming : `-slidingwindow <window-size>:<required-quality>`
@@ -66,7 +68,9 @@ or
       
 ## Paired ends data
 
-`./Filtrage.py PE` takes two input fastq files and outputs a trimmed version of these files and a two files containing 'single reads' for each direction. 'Single reads' are reads who passed the filter for one direction but not the other. This mode has also all options given by Trimmomatic, see above.
+`./Filtrage.py PE` takes two input fastq files and outputs a trimmed version of these files and a two files containing 'single reads' for each direction. 'Single reads' are reads who passed the filter for one direction but not the other. 
+
+This mode has also all options given by Trimmomatic, see above.
 
 ### Examples :
 

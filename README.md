@@ -24,8 +24,11 @@ This module has two ways of working (reading input files and trimming parameters
 
 
 And each way has two modes to work :
-     - single ends "SE" `./Filtrage SE` 
-     - paired ends "PE" `./Filtrage PE`
+
+- single ends "SE" `./Filtrage SE` 
+     
+- paired ends "PE" `./Filtrage PE`
+
 
 To read input files and trimming parameters from the XML file, run :
 

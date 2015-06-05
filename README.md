@@ -53,7 +53,10 @@ For more informations, see module help, running:
 ### Examples :
 
       python Filtrage.py SE read_1.fastq -illuminaclip fasta-file.fa:2:10:30
+      python Filtrage.py SE read_1.fq -slidingwindow 10:30
+      python Filtrage.py SE read_1.fq -maxinfo 15:0.8 -crop 7
       python Filtrage.py SE read_1.fq -slidingwindow 10:30 -leading 30 -minlen 36
+      python Filtrage.py SE read_1.fq -illuminaclip fasta-file.fa:2:10:30 -slidingwindow 4:30 -leading 30 -minlen 36
       
 ## Paired ends data
 

@@ -124,13 +124,16 @@ def check_fastq_extension(text):
 
 def check_extension(text):
 	"""
-	Booleen that check if a file is a fastq file and compressed (bz2 or gz) or not
+	Booleen that check if a file is a fastq file and compressed (bz2 or gz) or 
+	not
 
 	Takes one argument: text [string]
 
 	Returns one argument :
-		- 1 [integer] : if the extension is correct : it's a fastq file [.fastq or .fq] 
-		- 2 [integer] : if the extension is correct : it's a compressed fastq file [fastq/fq.bz2 or fastq/fq.gz]
+		- 1 [integer] : if the extension is correct : it's a fastq file 
+						[.fastq or .fq] 
+		- 2 [integer] : if the extension is correct : it's a compressed fastq 
+						file [fastq/fq.bz2 or fastq/fq.gz]
 		- or quit : if the extension isn't known
 	"""
 
@@ -144,7 +147,8 @@ def check_extension(text):
 	# check the last extension (if compressed)
 	if(ext1[1]=='.gz' or ext1[1]=='.bz2'):
 		
-		# check that the first extension is .fastq or .fq (check if it's a fastq file)
+		# check that the first extension is .fastq or .fq (check if it's a 
+		# fastq file)
 		if(check_fastq_extension(ext1[0]) == 1) : 
 			return 2 
 	
@@ -162,8 +166,10 @@ def check_input(text) :
 	Takes one argument: text [string]
 
 	Returns one argument :
-		- input_file [string] : if the extension is correct : it's a fastq file [.fastq or .fq] 
-		- 0 [integer] : if the extension is correct : it's a compressed fastq file [fastq/fq.bz2 or fastq/fq.gz]
+		- input_file [string] : if the extension is correct : it's a fastq file 
+		  [.fastq or .fq] 
+		- 0 [integer] : if the extension is correct : it's a compressed fastq 
+		  file [fastq/fq.bz2 or fastq/fq.gz]
 	"""	
 
 	# check that it's not empty
@@ -183,8 +189,8 @@ def check_input(text) :
 
 def check_child_number(tree, number):
 	"""
-	Boolen that checks that the tree have the expected number of child in the XML
-	file
+	Boolen that checks that the tree have the expected number of child in the 
+	XML file
 	
 	Takes two arguments : - tree [ElementTree] : the tree
 						  - number [integer] : the expected number of child
@@ -210,7 +216,8 @@ def get_pe_input(Paired_end, param):
 	Function that gets the input and output file for paired-end (PE) data.
 	
 	Takes two arguments : - Paired_end [ElementTree] : the subtree Paired-end
-						  - param [dict] : dictionnary containning all parameters
+						  - param [dict] : dictionnary containning all 
+						    parameters
 	
 	Returns param[dict] where have been added inputs parameters for PE
 	"""
@@ -253,7 +260,8 @@ def get_se_input(Single_end, param):
 	Function that gets the input and output file for single-end (SE) data.
 	
 	Takes two arguments : - Single_end [ElementTree] : the subtree Single-end
-						  - param [dict] : dictionnary containning all parameters
+						  - param [dict] : dictionnary containning all 
+						    parameters
 	
 	Returns param[dict] where have been added inputs parameters for SE
 	"""
@@ -278,7 +286,8 @@ for single-end data\n")
 
 def check_skip(text,location):
 	"""
-	Function that check if the value for skip is not empty and if it is 'yes' or 'no'.
+	Function that check if the value for skip is not empty and if it is 'yes' or
+	'no'.
 	
 	Takes two arguments : - text [string] : the value for skip option
 						  - location [string] : location of the skip option
@@ -384,7 +393,8 @@ def check_float(text, location):
 
 def check_true_false(text, location):
 	"""
-	Function that check if the text isn't empty and is either 'true' either 'false'
+	Function that check if the text isn't empty and is either 'true' either 
+	'false'
 	
 	Takes two arguments : - text [string] 	
 						  - location [string] : location of text
@@ -442,7 +452,8 @@ def check_yes_no(text, location):
 
 def get_min_adapt_length(skip,min_adapt_len):
 	"""
-	Function that get the argument for minimum adapter length in adapter trimming.
+	Function that get the argument for minimum adapter length in adapter 
+	trimming.
 	
 	Takes two arguments : - skip [string] 	
 						  - min_adapt_len [integer]

@@ -43,13 +43,14 @@ if __name__ == '__main__' :
 	
 	# checking :
 	if len(sys.argv) < 2 :
-		sys.exit("Usage : python Filtrage.py --XML or python Filtrage.py layout read_files\n\
-For more informations use the option '-h'.")
+		sys.exit("Usage : python Filtrage.py --XML or python Filtrage.py\
+ layout read_files\nFor more informations use the option '-h'.")
 
 	# if use the commandline argument then:
 	if arguments['layout'] != None :
 		if len(sys.argv) == 2 :
-			sys.exit("Error : A read file must be specified if you use the layout 'SE' or 2 read files if the layout 'PE' is specified")
+			sys.exit("Error : A read file must be specified if you\
+ use the layout 'SE' or 2 read files if the layout 'PE' is specified")
 
 
 	# Use XML file to launch Trimmomatic

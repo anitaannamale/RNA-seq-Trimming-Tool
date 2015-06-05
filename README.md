@@ -19,20 +19,24 @@ This module has two ways of working (reading input files and trimming parameters
       - or command line directly
 
 And each way has two modes to work :
-     - single ends "SE"
-     - paired ends "PE"
+     - single ends "SE" `./Filtrage SE`
+     - paired ends "PE" `./Filtrage PE`
 
 To read input files and trimming parameters from the XML file, run :
 
             'python ./Filtrage.py --XML'
 
-To launch trimmomatic using commandline arguments see below:.
+To launch trimmomatic using commandline arguments see below:
 
 For more informations, see module help, running:
 
             'python ./Filtrage.py -h'
             
 ## Single ends data
+
+`./Filtrage.py SE` takes an input fastq file and outputs a trimmed version of that file. It has all options given by Trimmomatic :
+
+
 
 ## Paired ends data
 

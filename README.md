@@ -57,7 +57,7 @@ For more informations, see module help, running:
       
 ## Paired ends data
 
-`./Filtrage.py PE` takes two input fastq files and outputs a trimmed version of these files. It has all options given by Trimmomatic,  see above.
+`./Filtrage.py PE` takes two input fastq files and outputs a trimmed version of these files and a two files containing 'single reads' for each direction. 'Single reads' are reads who passed the filter for one direction but not the other. This mode has also all options given by Trimmomatic, see above.
 
 ### Examples :
 

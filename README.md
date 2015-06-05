@@ -58,3 +58,8 @@ For more informations, see module help, running:
 ## Paired ends data
 
 `./Filtrage.py PE` takes two input fastq files and outputs a trimmed version of these files. It has all options given by Trimmomatic,  see above.
+
+### Examples :
+
+      python Filtrage.py PE read_1.fastq read_2.fastq -illuminaclip fasta-file.fa:2:10:30 -crop 10
+      python Filtrage.py PE read_1.fq.bz2 read_2.fq.bz2 -illuminaclip fasta-file.fa:2:10:30 -slidingwindow 10:30 -minlen 36

@@ -35,11 +35,9 @@ To launch trimmomatic using commandline arguments see below:
 
 For more informations, see module help, running:
 
-      'python ./Filtrage.py -h'
-      
-      or
-      
-      `python ./Filtrage.py --help`
+`python ./Filtrage.py -h`
+or
+`python ./Filtrage.py --help`
       
       
 ## Single ends data

@@ -35,8 +35,13 @@ To launch trimmomatic using commandline arguments see below:
 
 For more informations, see module help, running:
 
-            'python ./Filtrage.py -h'
-            
+      'python ./Filtrage.py -h'
+      
+      or
+      
+      `python ./Filtrage.py --help`
+      
+      
 ## Single ends data
 
 `./Filtrage.py SE` takes an input fastq file and outputs a trimmed version of that file. It has all options given by Trimmomatic :

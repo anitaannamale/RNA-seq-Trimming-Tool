@@ -265,7 +265,7 @@ def commandline_quality(param,cmd):
 
 
 
-def commandline_step_1(param, nb,inout):
+def commandline_step_1(loc,param, nb,inout):
 	"""
 	Function that generate step 1 command line for Trimmomatic.
 	
@@ -280,7 +280,7 @@ def commandline_step_1(param, nb,inout):
 	"""
 	
 	# base command line
-	cmd = 'java -jar trimmomatic-0.33.jar'
+	cmd = 'java -jar {0}trimmomatic-0.33.jar'.format(loc[:-3])
 	
 	# adding input and output filename
 	cmd, inout = commandline_input_output(param, cmd, nb, inout)
@@ -298,7 +298,7 @@ def commandline_step_1(param, nb,inout):
 
 
 
-def commandline_step_2(param, nb, inout):
+def commandline_step_2(loc,param, nb, inout):
 	"""
 	Function that generate step 2 command line for Trimmomatic.
 	
@@ -312,7 +312,7 @@ def commandline_step_2(param, nb, inout):
 	"""
 	
 	# base command line
-	cmd = 'java -jar trimmomatic-0.33.jar'
+	cmd = 'java -jar {0}trimmomatic-0.33.jar'.format(loc[:-3])
 
 	# adding input and output filename
 	cmd, inout = commandline_input_output(param,cmd,nb,inout)

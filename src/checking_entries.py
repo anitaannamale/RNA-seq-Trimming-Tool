@@ -541,12 +541,14 @@ def get_file_prefix(text):
 	tmp = check_fastq_extension(text)
 
 	prefix = os.path.splitext(text)[0]
+	prefix = os.path.basename(prefix)
 
 	if(tmp==1) : 
 		return prefix
 	
 	else :
 		prefix = os.path.splitext(prefix)[0]
+		prefix = os.path.basename(prefix)
 		return prefix
 
 	

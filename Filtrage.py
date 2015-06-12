@@ -99,20 +99,20 @@ if __name__ == '__main__' :
 			nb = 1
 	
 		
-		
-		# generating step2 (quality trimming) commandline
-		cmd_step2 = commandline_step_2(loc,param,nb,io)
-
-		# If Quality Trimming
-		if(cmd_step2 != None):
+		# If Quality Trimming Step
+		tmp_cmd="test"
+		if(commandline_quality(param,tmp_cmd)!=None):
 			
 			if(nb==1):
 				# change step1 output files to step2 input files
 				io = change_output_as_input(io, param)
+		
+			# generating step2 (quality trimming) commandline
+			cmd_step2 = commandline_step_2(loc,param,nb,io)	
 			
 			# split commandline
 			args_2 = shlex.split(cmd_step2)
-			
+		
 			# launch step2
 			with open("output_file_step2.out","w") as file_out2:
 				prog_2 = subprocess.check_call(args_2, stderr=file_out2)
@@ -151,16 +151,17 @@ if __name__ == '__main__' :
 			nb=1
 
 		
-		# generating step2 (quality trimming) commandline
-		cmd_step2 = argparse_commandline_step_2(loc,arguments, nb, io)
-
-		# If Quality Trimming
-		if(cmd_step2 != None):
+		# If Quality Trimming step
+		tmp_cmd="test"
+		if(argparsecmd_quality(arguments,tmp_cmd)!=None):
 			
 			if(nb==1):	
 				# change step1 output files to step2 input files
 				io = change_output_as_input(io, arguments)
 			
+			# generating step2 (quality trimming) commandline
+			cmd_step2 = argparse_commandline_step_2(loc,arguments, nb, io)
+				
 			# split commandline
 			args_2 = shlex.split(cmd_step2)
 
@@ -171,6 +172,3 @@ if __name__ == '__main__' :
 			if(nb==1):	
 				# delete temporary files
 				os.system('rm {0} {1}'.format(io['trimmed'][0], io['trimmed'][1]))
-
-
-

@@ -441,7 +441,7 @@ def check_args(arg):
 	return arg
 
 
-def argparse_commandline_step_1(arg,nb, inout):
+def argparse_commandline_step_1(loc,arg,nb, inout):
 	"""
 	Function that generate step1 (adapter trimming) command line for Trimmomatic.
 	
@@ -457,7 +457,7 @@ def argparse_commandline_step_1(arg,nb, inout):
 	"""
 	
 	# base command line
-	cmd = 'java -jar trimmomatic-0.33.jar'
+	cmd = 'java -jar {0}trimmomatic-0.33.jar'.format(loc[:-3])
 
 	# adding layout and input and output files
 	cmd, inout = commandline_input_output(arg, cmd, nb, inout) # from commandline
@@ -474,7 +474,7 @@ def argparse_commandline_step_1(arg,nb, inout):
 
 
 
-def argparse_commandline_step_2(arg, nb, inout):
+def argparse_commandline_step_2(loc,arg, nb, inout):
 	"""
 	Function that generate step1 2 (quality trimming) command line for 
 	Trimmomatic.
@@ -491,7 +491,7 @@ def argparse_commandline_step_2(arg, nb, inout):
 	"""
 	
 	# base command line
-	cmd = 'java -jar trimmomatic-0.33.jar'
+	cmd = 'java -jar {0}trimmomatic-0.33.jar'.format(loc[:-3])
 	
 	# adding layout and input and output files
 	cmd, inout = commandline_input_output(arg, cmd, nb, inout)

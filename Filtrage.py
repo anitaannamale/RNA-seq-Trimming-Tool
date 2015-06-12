@@ -20,7 +20,9 @@ import shlex, subprocess
 import os
 import sys
 
-sys.path.append("./src")
+# Give the location of RNA-seq-Trimming-Tool directory
+loc="./src"
+sys.path.append(loc)
 
 # personal modules
 from parseXML import *
@@ -81,7 +83,7 @@ if __name__ == '__main__' :
 		io = dict()
 		
 		# generating step1 (adapter trimming) commandline
-		cmd_step1, inout = commandline_step_1(param,nb,io)
+		cmd_step1, inout = commandline_step_1(loc,param,nb,io)
 		
 		# If Adapter Trimming
 		if(cmd_step1 != None):
@@ -99,13 +101,14 @@ if __name__ == '__main__' :
 		
 		
 		# generating step2 (quality trimming) commandline
-		cmd_step2 = commandline_step_2(param,nb,io)
+		cmd_step2 = commandline_step_2(loc,param,nb,io)
 
 		# If Quality Trimming
 		if(cmd_step2 != None):
 			
-			# change step1 output files to step2 input files
-			io = change_output_as_input(io, param)
+			if(nb==1):
+				# change step1 output files to step2 input files
+				io = change_output_as_input(io, param)
 			
 			# split commandline
 			args_2 = shlex.split(cmd_step2)
@@ -114,8 +117,9 @@ if __name__ == '__main__' :
 			with open("output_file_step2.out","w") as file_out2:
 				prog_2 = subprocess.check_call(args_2, stderr=file_out2)
 			
-			# delete temporary files
-			os.system('rm {0} {1}'.format(io['trimmed'][0], io['trimmed'][1]))
+			if(nb==1):
+				# delete temporary files
+				os.system('rm {0} {1}'.format(io['trimmed'][0], io['trimmed'][1]))
 	
 	
 	# Use Arguments line to launch Trimmomatic
@@ -131,7 +135,7 @@ if __name__ == '__main__' :
 		io= dict()
 		
 		# generating step1 (adapter trimming) commandline
-		cmd_step1 = argparse_commandline_step_1(arguments, nb,io)
+		cmd_step1 = argparse_commandline_step_1(loc,arguments, nb,io)
 	
 		# If Adapter Trimming
 		if(cmd_step1 != None):
@@ -148,11 +152,12 @@ if __name__ == '__main__' :
 
 		
 		# generating step2 (quality trimming) commandline
-		cmd_step2 = argparse_commandline_step_2(arguments, nb, io)
+		cmd_step2 = argparse_commandline_step_2(loc,arguments, nb, io)
 
 		# If Quality Trimming
 		if(cmd_step2 != None):
-		
+			
+			if(nb==1):	
 			# change step1 output files to step2 input files
 			io = change_output_as_input(io, arguments)
 			
@@ -162,9 +167,10 @@ if __name__ == '__main__' :
 			# launch step2
 			with open("output_file_step2.out","w") as out:
 				prog_2 = subprocess.check_call(args_2, stderr=out)
-				
-			# delete temporary files
-			os.system('rm {0} {1}'.format(io['trimmed'][0], io['trimmed'][1]))
+			
+			if(nb==1):	
+				# delete temporary files
+				os.system('rm {0} {1}'.format(io['trimmed'][0], io['trimmed'][1]))
 
 
 

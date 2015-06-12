@@ -473,6 +473,67 @@ def argparse_commandline_step_1(loc,arg,nb, inout):
 	return cmd
 
 
+def argparsecmd_quality(arg,cmd):
+	"""
+	Function that add to commandline 'cmd' quality trimming parameters.
+	
+	Takes 2 arguments :
+		- arg [dict] : dictionnary containning all the command argument entries.
+		- cmd [string] : base commandline for trimmomatic
+	
+	Returns:
+		- cmd [string] : 'cmd' with quality trimming arguments 
+		or
+		- None if there is no quality trimming step
+	"""
+	
+	# if atleast one quality trimming parameter is used, flag will be switched 
+	# to 1
+	
+	flag = 0
+	
+	if(arg['crop'] != None):
+		cmd += ' CROP:{0}'.format(arg['crop'])
+		flag = 1
+
+	if(arg['headcrop'] != None):
+		cmd += ' HEADCROP:{0}'.format(arg['headcrop'])
+		flag = 1
+
+	if(arg['leading'] != None):
+		cmd += ' LEADING:{0}'.format(arg['leading'])
+		flag = 1
+
+	if(arg['trailing'] != None):
+		cmd += ' TRAILING:{0}'.format(arg['trailing'])
+		flag = 1
+
+	if(arg['slidingwindow'] != None):
+		cmd += ' SLIDINGWINDOW:{0}'.format(arg['slidingwindow'])
+		flag = 1
+
+	if(arg['maxinfo'] != None):
+		cmd += ' MAXINFO:{0}'.format(arg['maxinfo'])
+		flag = 1
+
+	if(arg['minlen'] != None):
+		cmd += ' MINLEN:{0}'.format(arg['minlen'])
+		flag = 1
+
+	if(arg['tophred33']):
+		cmd += ' {0}'.format(arg['tophred33'])
+		flag = 1
+	
+	if(arg['tophred64']):
+		cmd += ' {0}'.format(arg['tophred64'])
+		flag = 1
+	
+	
+	if(flag == 0):
+		cmd = None
+
+	return cmd
+	
 
 def argparse_commandline_step_2(loc,arg, nb, inout):
 	"""
@@ -496,39 +557,7 @@ def argparse_commandline_step_2(loc,arg, nb, inout):
 	# adding layout and input and output files
 	cmd, inout = commandline_input_output(arg, cmd, nb, inout)
 	
-	cmd_1 = cmd
-
-	if(arg['slidingwindow'] != None):
-		cmd += ' SLIDINGWINDOW:{0}'.format(arg['slidingwindow'])
-
-	if(arg['maxinfo'] != None):
-		cmd += ' MAXINFO:{0}'.format(arg['maxinfo'])
-
-	if(arg['leading'] != None):
-		cmd += ' LEADING:{0}'.format(arg['leading'])
-
-	if(arg['trailing'] != None):
-		cmd += ' TRAILING:{0}'.format(arg['trailing'])
-
-	if(arg['crop'] != None):
-		cmd += ' CROP:{0}'.format(arg['crop'])
-
-	if(arg['headcrop'] != None):
-		cmd += ' HEADCROP:{0}'.format(arg['headcrop'])
-
-	if(arg['minlen'] != None):
-		cmd += ' MINLEN:{0}'.format(arg['minlen'])
-
-	if(arg['tophred33']):
-		cmd += ' {0}'.format(arg['tophred33'])
-
-	if(arg['tophred64']):
-		cmd += ' {0}'.format(arg['tophred64'])
-
-	if(cmd == cmd_1):
-		cmd = None
+	# adding quality trimming parameters
+	cmd = argparsecmd_quality(arg, cmd)
 
 	return cmd
-	
-	
-	

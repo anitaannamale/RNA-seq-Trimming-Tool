@@ -95,9 +95,7 @@ if __name__ == '__main__' :
 			
 			# nb become 1 (first step done)
 			nb = 1
-		
-			# change step1 output files to step2 input files
-			io = change_output_as_input(io, param)
+	
 		
 		
 		# generating step2 (quality trimming) commandline
@@ -105,6 +103,9 @@ if __name__ == '__main__' :
 
 		# If Quality Trimming
 		if(cmd_step2 != None):
+			
+			# change step1 output files to step2 input files
+			io = change_output_as_input(io, param)
 			
 			# split commandline
 			args_2 = shlex.split(cmd_step2)
@@ -144,9 +145,6 @@ if __name__ == '__main__' :
 			
 			# nb become 1 (first step done)
 			nb=1
-			
-			# change step1 output files to step2 input files
-			io = change_output_as_input(io, arguments)
 
 		
 		# generating step2 (quality trimming) commandline
@@ -155,6 +153,9 @@ if __name__ == '__main__' :
 		# If Quality Trimming
 		if(cmd_step2 != None):
 		
+			# change step1 output files to step2 input files
+			io = change_output_as_input(io, arguments)
+			
 			# split commandline
 			args_2 = shlex.split(cmd_step2)
 

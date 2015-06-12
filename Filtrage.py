@@ -158,8 +158,8 @@ if __name__ == '__main__' :
 		if(cmd_step2 != None):
 			
 			if(nb==1):	
-			# change step1 output files to step2 input files
-			io = change_output_as_input(io, arguments)
+				# change step1 output files to step2 input files
+				io = change_output_as_input(io, arguments)
 			
 			# split commandline
 			args_2 = shlex.split(cmd_step2)

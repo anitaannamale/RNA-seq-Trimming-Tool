@@ -20,8 +20,8 @@ import shlex, subprocess
 import os
 import sys
 
-# Give the location of RNA-seq-Trimming-Tool directory
-loc="./src"
+# Get the location of RNA-seq-Trimming-Tool directory
+loc= os.path.dirname(os.path.abspath(__file__)) + "/src"
 sys.path.append(loc)
 
 # personal modules
